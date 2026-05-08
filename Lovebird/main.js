@@ -40,7 +40,7 @@ const orderForm = document.getElementById('orderForm');
 const formFeedback = document.getElementById('formFeedback');
 const submitBtn = document.getElementById('submitBtn');
 
-async function placeOrder(customerName, whatsapp, message, productName) {
+async function placeOrder(customerName, whatsapp, message, productName, isMobileDevice, newWindow) {
     try {
         // A. Firebase Database mein data save karna (Record ke liye)
         const ordersRef = ref(db, 'orders');
@@ -62,11 +62,8 @@ async function placeOrder(customerName, whatsapp, message, productName) {
 
         const fullMessage = `${header}\n\n🆔 *Order ID:* #${shortOrderId} (Auto-generated)\n👤 *Customer Name:* ${customerName}\n📱 *WhatsApp:* ${whatsapp}\n🎁 *Product Selected:* ${productName}\n🎨 *Customization:* ${message || "Standard"}${footer}`;
 
-        // WhatsApp Link Generator (Direct App on Mobile)
-        const isMobileDevice = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-        const whatsappUrl = isMobileDevice 
-            ? `whatsapp://send?phone=${myNumber}&text=${encodeURIComponent(fullMessage)}`
-            : `https://wa.me/${myNumber}?text=${encodeURIComponent(fullMessage)}`;
+        // WhatsApp Link Generator (Universal Link)
+        const whatsappUrl = `https://api.whatsapp.com/send?phone=${myNumber}&text=${encodeURIComponent(fullMessage)}`;
 
         // C. Animation Trigger (Shatter Effect)
         if (typeof shatterBox === "function") {
@@ -77,7 +74,13 @@ async function placeOrder(customerName, whatsapp, message, productName) {
 
         // D. Redirect to WhatsApp (5 seconds delay for animation)
         setTimeout(() => {
-            window.location.href = whatsappUrl;
+            if (isMobileDevice) {
+                window.location.href = whatsappUrl;
+            } else if (newWindow) {
+                newWindow.location.href = whatsappUrl;
+            } else {
+                window.location.href = whatsappUrl;
+            }
         }, 5000);
 
         // Update UI
@@ -97,6 +100,16 @@ orderForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     submitBtn.innerText = "Processing..."; submitBtn.disabled = true;
 
+    const isMobileDevice = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    
+    let newWindow = null;
+    if (!isMobileDevice) {
+        newWindow = window.open('about:blank', '_blank');
+        if (newWindow) {
+            newWindow.document.write("<html style='background:#fbf9f4;'><body style='display:flex;justify-content:center;align-items:center;height:100vh;font-family:sans-serif;color:#c5a059;'><h2>Processing Order...</h2></body></html>");
+        }
+    }
+
     // Journey tracking
     const timeSpent = (Date.now() - sectionEnterTime) / 1000;
     if (!journeyLogs[currentSection]) journeyLogs[currentSection] = 0;
@@ -110,7 +123,7 @@ orderForm.addEventListener('submit', async (e) => {
     const productName = productSelect.options[productSelect.selectedIndex].text;
 
     // Call the new placeOrder function
-    await placeOrder(customerName, whatsapp, message, productName);
+    await placeOrder(customerName, whatsapp, message, productName, isMobileDevice, newWindow);
 });
 
 
