@@ -56,3 +56,18 @@
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
     letter-spacing: 1px;
 }
+
+/* Mobile Responsiveness for Modal */
+@media (max-width: 768px) {
+    .modal-content {
+        max-width: 95%;
+        border-radius: 20px;
+        border: 8px solid #fff;
+        padding: 5px;
+    }
+    .modal-instruction {
+        bottom: 20px;
+        font-size: 0.9rem;
+        padding: 10px 20px;
+    }
+}

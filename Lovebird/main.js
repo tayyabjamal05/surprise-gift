@@ -416,7 +416,7 @@ videoSources.forEach((src, i) => {
     });
 
     const cssObj = new CSS3DObject(div);
-    const videoSpacing = window.innerWidth < 768 ? 8 : 14;
+    const videoSpacing = window.innerWidth < 768 ? 4.5 : 14;
     cssObj.position.set((i - 0.5) * videoSpacing, 0, -2);
     // Scale down to match WebGL units (pixels to units)
     cssObj.scale.set(0.02, 0.02, 0.02);
@@ -518,13 +518,13 @@ window.addEventListener('mousemove', (event) => {
         if (intersects.length > 0) {
             if (!isHoveringBox) {
                 isHoveringBox = true;
-                gsap.to(state, { glow: 2, phase: 0.2, duration: 0.8, ease: "power2.out" }); // Reduced phase to 0.2
+                gsap.to(state, { glow: 2, duration: 0.8, ease: "power2.out" });
                 gsap.to(boxContainer.scale, { x: 1.05, y: 1.05, z: 1.05, duration: 0.5 });
             }
         } else {
             if (isHoveringBox) {
                 isHoveringBox = false;
-                gsap.to(state, { glow: 0.1, phase: 0, duration: 0.8, ease: "power2.inOut" }); // Re-fold
+                gsap.to(state, { glow: 0.1, duration: 0.8, ease: "power2.inOut" });
                 gsap.to(boxContainer.scale, { x: 1, y: 1, z: 1, duration: 0.5 });
             }
         }
@@ -565,7 +565,9 @@ function animate() {
 
     // Update CSS3D Scales
     cssObjects.forEach(obj => {
-        const currentScale = THREE.MathUtils.lerp(obj.scale.x, state.cssScale, 0.25);
+        const mobileFactor = window.innerWidth < 768 ? 0.45 : 1;
+        const targetScale = state.cssScale * mobileFactor;
+        const currentScale = THREE.MathUtils.lerp(obj.scale.x, targetScale, 0.25);
         obj.scale.setScalar(currentScale);
 
         // Hide completely if too small to avoid the tiny dot issue
@@ -664,7 +666,7 @@ window.addEventListener('resize', () => {
     });
     
     // Update video spacing on resize
-    const videoSpacing = isMobileResize ? 8 : 14;
+    const videoSpacing = isMobileResize ? 4.5 : 14;
     cssObjects.forEach((obj, i) => {
         obj.position.set((i - 0.5) * videoSpacing, 0, -2);
     });

@@ -294,7 +294,7 @@
     <!-- Image Preview Modal -->
     <div id="imageModal" class="image-modal">
         <img id="modalImg" src="" alt="Preview" class="modal-content">
-        <div class="modal-instruction">Release to close</div>
+        <div class="modal-instruction">Tap anywhere to close</div>
     </div>
 
     <script>
@@ -303,7 +303,8 @@
             const modalImg = document.getElementById('modalImg');
 
             document.querySelectorAll('.img-placeholder').forEach(placeholder => {
-                const showModal = (e) => {
+                placeholder.addEventListener('click', (e) => {
+                    e.stopPropagation();
                     // Extract URL from inline style background: url('...')
                     const style = placeholder.style.backgroundImage;
                     const url = style.replace(/^url\(["']?/, '').replace(/["']?\)$/, '');
@@ -312,27 +313,13 @@
                         modalImg.src = url;
                         modal.classList.add('active');
                     }
-                };
-
-                const hideModal = () => {
-                    modal.classList.remove('active');
-                };
-
-                // Desktop events
-                placeholder.addEventListener('mousedown', showModal);
-                
-                // Mobile events
-                placeholder.addEventListener('touchstart', (e) => {
-                    // Prevent context menu
-                    e.preventDefault();
-                    showModal();
                 });
             });
 
-            // Global release to ensure modal closes even if mouse/finger moves outside
-            window.addEventListener('mouseup', () => modal.classList.remove('active'));
-            window.addEventListener('touchend', () => modal.classList.remove('active'));
-            window.addEventListener('mouseleave', () => modal.classList.remove('active'));
+            // Global click to close
+            window.addEventListener('click', () => {
+                modal.classList.remove('active');
+            });
         });
     </script>
 
