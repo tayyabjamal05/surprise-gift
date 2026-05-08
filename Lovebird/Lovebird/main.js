@@ -119,7 +119,7 @@ const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
 // Push camera back on mobile
 const isMobile = window.innerWidth < 768;
-camera.position.set(0, 0, isMobile ? 22 : 18); // Brought closer (from 28/20)
+camera.position.set(0, 0, isMobile ? 25 : 16); // Consistent with resize handler
 camera.lookAt(0, 0, 0);
 
 // WebGL Renderer
@@ -343,9 +343,10 @@ const itemColors = [0xffd700, 0xff0055, 0x00ffff];
 itemGeos.forEach((geo, i) => {
     const mat = new THREE.MeshStandardMaterial({ color: itemColors[i], roughness: 0.2, metalness: 0.8 });
     const mesh = new THREE.Mesh(geo, mat);
-    mesh.position.set((i - 1) * 5, -20, 0); // Increased spacing from 4 to 5
+    const gridSpacing = window.innerWidth < 768 ? 3.5 : 5;
+    mesh.position.set((i - 1) * gridSpacing, -20, 0); // Responsive spacing
     gridGroup.add(mesh);
-    gridItems.push({ mesh, baseX: (i - 1) * 5 });
+    gridItems.push({ mesh, baseX: (i - 1) * gridSpacing });
 });
 
 
@@ -415,7 +416,8 @@ videoSources.forEach((src, i) => {
     });
 
     const cssObj = new CSS3DObject(div);
-    cssObj.position.set((i - 0.5) * 14, 0, -2);
+    const videoSpacing = window.innerWidth < 768 ? 8 : 14;
+    cssObj.position.set((i - 0.5) * videoSpacing, 0, -2);
     // Scale down to match WebGL units (pixels to units)
     cssObj.scale.set(0.02, 0.02, 0.02);
     cssGroup.add(cssObj);
@@ -649,8 +651,23 @@ window.addEventListener('resize', () => {
     camera.aspect = window.innerWidth / window.innerHeight;
 
     // Adjust camera Z on resize for mobile responsiveness
-    const isMobile = window.innerWidth < 768;
-    camera.position.z = isMobile ? 25 : 16;
+    const isMobileResize = window.innerWidth < 768;
+    camera.position.z = isMobileResize ? 25 : 16;
+    
+    // Update grid spacing on resize
+    const gridSpacing = isMobileResize ? 3.5 : 5;
+    gridItems.forEach((item, i) => {
+        item.baseX = (i - 1) * gridSpacing;
+        if (state.phase < 1.5) {
+            item.mesh.position.x = item.baseX;
+        }
+    });
+    
+    // Update video spacing on resize
+    const videoSpacing = isMobileResize ? 8 : 14;
+    cssObjects.forEach((obj, i) => {
+        obj.position.set((i - 0.5) * videoSpacing, 0, -2);
+    });
 
     camera.updateProjectionMatrix();
     renderer.setSize(window.innerWidth, window.innerHeight);
