@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Surprise Gift | 3D Immersive E-commerce</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="modal.css">
+
+    <!-- GSAP for Scroll Animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+</head>
+
+<body>
+    <!-- 3D Canvas Container -->
+    <div id="canvas-container"></div>
+    <div id="css-container"></div>
+
+    <!-- UI Overlay (Scrollable) -->
+    <div class="ui-layer">
+
+
+
+        <!-- Top Announcement Bar -->
+
+
+        <!-- Navigation Bar -->
+        <nav class="navbar">
+            <div class="nav-left">
+                <a href="#home" class="logo-link">
+                    <img src="logo.jpeg" alt="Surprise Gift Logo" class="main-logo">
+                    <div class="logo-text-wrapper">
+                        <span class="logo-main">SURPRISE</span>
+                        <span class="logo-sub">GIFT STORE</span>
+                    </div>
+                </a>
+            </div>
+            <div class="nav-center">
+                <div class="nav-links">
+                    <a href="#home" class="active">Home</a>
+                    <a href="#collection">Collection</a>
+                    <a href="#showcase">Showcase</a>
+
+                    <a href="https://wa.me/923293163015" target="_blank">Contact</a>
+                </div>
+            </div>
+            <div class="nav-right">
+                <div class="nav-icons">
+                    <button class="icon-btn search-btn">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        </svg>
+                    </button>
+                    <button class="icon-btn cart-btn">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"></path>
+                            <line x1="3" y1="6" x2="21" y2="6"></line>
+                            <path d="M16 10a4 4 0 0 1-8 0"></path>
+                        </svg>
+                        <span class="cart-badge">0</span>
+                    </button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Page 1: Home -->
+        <section id="home" class="page-section">
+            <div class="hero-container">
+                <div class="hero-content">
+                    <h1>Unbox the <br><span class="highlight">Magic</span> <br>of Every Moment</h1>
+                    <p>Handcrafted explosion boxes, infinity roses, and cash bouquets — gifts that make hearts skip a beat. 
+                       Because some moments deserve more than ordinary.</p>
+                    <div class="hero-actions">
+                        <a href="#collection" class="explore-btn">Explore Collection &rarr;</a>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Feature Strip -->
+            <div class="feature-strip">
+                <div class="feature-item">
+                    <div class="feature-icon-wrapper">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#c5a059" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                        </svg>
+                    </div>
+                    <div class="feature-text">
+                        <strong>Premium Quality</strong>
+                        <span>Handmade with love</span>
+                    </div>
+                </div>
+                <div class="feature-divider"></div>
+                <div class="feature-item">
+                    <div class="feature-icon-wrapper">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#c5a059" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                        </svg>
+                    </div>
+                    <div class="feature-text">
+                        <strong>Custom Designs</strong>
+                        <span>Tailored for you</span>
+                    </div>
+                </div>
+                <div class="feature-divider"></div>
+                <div class="feature-item">
+                    <div class="feature-icon-wrapper">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#c5a059" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="1" y="3" width="15" height="13"></rect>
+                            <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
+                            <circle cx="5.5" cy="18.5" r="2.5"></circle>
+                            <circle cx="18.5" cy="18.5" r="2.5"></circle>
+                        </svg>
+                    </div>
+                    <div class="feature-text">
+                        <strong>Fast Delivery</strong>
+                        <span>Global shipping</span>
+                    </div>
+                </div>
+                <div class="feature-divider"></div>
+                <div class="feature-item">
+                    <div class="feature-icon-wrapper">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#c5a059" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                        </svg>
+                    </div>
+                    <div class="feature-text">
+                        <strong>24/7 Support</strong>
+                        <span>Concierge service</span>
+                    </div>
+                </div>
+                <div class="feature-divider"></div>
+                <div class="feature-item">
+                    <div class="feature-icon-wrapper">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#c5a059" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path
+                                d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+                            </path>
+                        </svg>
+                    </div>
+                    <div class="feature-text">
+                        <strong>Gift Ready</strong>
+                        <span>Luxury packaging</span>
+                    </div>
+                </div>
+                <div class="feature-divider"></div>
+                <div class="feature-item">
+                    <div class="feature-icon-wrapper">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#c5a059" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                            <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                        </svg>
+                    </div>
+                    <div class="feature-text">
+                        <strong>Eco Friendly</strong>
+                        <span>Sustainable materials</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Page 2: Collection -->
+        <section id="collection" class="page-section">
+            <div class="section-content">
+                <h2>Our <span class="highlight">Collection</span></h2>
+                <div class="product-grid">
+                    <div class="product-card">
+                        <div class="img-placeholder"
+                            style="background: url('hdjhaj.jpeg') center/cover;">
+                        </div>
+                        <h3>Custom Box</h3>
+                        <p>Handcrafted to hold your special memories.</p>
+                    </div>
+                    <div class="product-card" data-product="bouquet">
+                        <div class="img-placeholder" style="background: url('pho1.jpeg') center/cover;">
+                        </div>
+                        <h3>Cash Bouquet</h3>
+                        <p>A creative way to gift wealth and beauty.</p>
+                    </div>
+                    <div class="product-card">
+                        <div class="img-placeholder"
+                            style="background: url('dknfd.jpeg') center/cover;">
+                        </div>
+                        <h3>Ribbon Flower Bouquet</h3>
+                        <p>Freshly picked and elegantly arranged.</p>
+                    </div>
+                    <div class="product-card">
+                        <div class="img-placeholder"
+                            style="background: url('choklate box.png') center/cover;">
+                        </div>
+                        <h3>Chocolate Box</h3>
+                        <p>Premium chocolates for the sweetest moments.</p>
+                    </div>
+                    <div class="product-card">
+                        <div class="img-placeholder"
+                            style="background: url('Gemini_Generated_Image_gxcbodgxcbodgxcb (1).png') center/cover;">
+                        </div>
+                        <h3>Single Flower Bouquet</h3>
+                        <p>A delicate gesture for someone special.</p>
+                    </div>
+                    <div class="product-card">
+                        <div class="img-placeholder"
+                            style="background: url('Gemini_Generated_Image_r3tegor3tegor3te.png') center/cover;">
+                        </div>
+                        <h3>Wrist Garland</h3>
+                        <p>Exquisite floral jewelry for celebrations.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+
+        <!-- Page 4: Showcase -->
+        <section id="showcase" class="page-section">
+            <div class="section-content" style="pointer-events: none;">
+                <h2 style="text-align:center;">Instagram <span class="highlight">Vibes</span></h2>
+                <p style="text-align:center;">@surprisegift.pk</p>
+                <!-- Masonry grid removed, replaced by 3D Carousel in main.js -->
+            </div>
+        </section>
+
+        <!-- Page 5: Order / Database -->
+        <section id="order" class="page-section center-flex">
+            <div class="order-form-container glass-panel">
+                <h2>Craft Your <span class="highlight">Gift</span></h2>
+                <form id="orderForm">
+                    <div class="input-group">
+                        <label>Your Name</label>
+                        <input type="text" id="orderName" required placeholder="John Doe">
+                    </div>
+                    <div class="input-group">
+                        <label>WhatsApp Number</label>
+                        <input type="tel" id="orderPhone" required placeholder="+92 300 0000000">
+                    </div>
+                    <div class="input-group">
+                        <label>Select Product</label>
+                        <select id="orderProduct">
+                            <option value="custom_box">Custom Box</option>
+                            <option value="cash_bouquet">Cash Bouquet</option>
+                            <option value="flower_bouquet">Ribbon Flower Bouquet</option>
+                            <option value="chocolate_box">Chocolate Box</option>
+                            <option value="single_flower">Single Flower Bouquet</option>
+                            <option value="wrist_garland">Wrist Garland</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label>Custom Message / Note</label>
+                        <textarea id="orderNote" rows="3"
+                            placeholder="e.g. Write 'Happy Birthday Sara' on the box"></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn" id="submitBtn">Send Order Request</button>
+                    <p id="formFeedback" class="hidden">Order Received! We will contact you shortly.</p>
+                </form>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Import maps polyfill for Three.js & Firebase -->
+    <script async src="https://unpkg.com/es-module-shims@1.8.0/dist/es-module-shims.js"></script>
+
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+                "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/",
+                "firebase/app": "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js",
+                "firebase/firestore": "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js",
+                "firebase/database": "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js"
+            }
+        }
+    </script>
+
+    <!-- Image Preview Modal -->
+    <div id="imageModal" class="image-modal">
+        <img id="modalImg" src="" alt="Preview" class="modal-content">
+        <div class="modal-instruction">Release to close</div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImg');
+
+            document.querySelectorAll('.img-placeholder').forEach(placeholder => {
+                const showModal = (e) => {
+                    // Extract URL from inline style background: url('...')
+                    const style = placeholder.style.backgroundImage;
+                    const url = style.replace(/^url\(["']?/, '').replace(/["']?\)$/, '');
+                    
+                    if (url && url !== 'none') {
+                        modalImg.src = url;
+                        modal.classList.add('active');
+                    }
+                };
+
+                const hideModal = () => {
+                    modal.classList.remove('active');
+                };
+
+                // Desktop events
+                placeholder.addEventListener('mousedown', showModal);
+                
+                // Mobile events
+                placeholder.addEventListener('touchstart', (e) => {
+                    // Prevent context menu
+                    e.preventDefault();
+                    showModal();
+                });
+            });
+
+            // Global release to ensure modal closes even if mouse/finger moves outside
+            window.addEventListener('mouseup', () => modal.classList.remove('active'));
+            window.addEventListener('touchend', () => modal.classList.remove('active'));
+            window.addEventListener('mouseleave', () => modal.classList.remove('active'));
+        });
+    </script>
+
+    <!-- Application Logic -->
+    <script type="module" src="main.js"></script>
+</body>
+
+</html>

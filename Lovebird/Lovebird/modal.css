@@ -1,0 +1,58 @@
+/* Image Preview Modal - Luxury Aesthetic */
+.image-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(40px) saturate(120%);
+    -webkit-backdrop-filter: blur(40px) saturate(120%);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.image-modal.active {
+    display: flex;
+    opacity: 1;
+}
+
+.modal-content {
+    max-width: 90%;
+    max-height: 80vh;
+    width: auto;
+    height: auto;
+    border-radius: 40px;
+    box-shadow: 0 40px 80px rgba(0, 0, 0, 0.3);
+    transform: scale(0.9);
+    transition: transform 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+    border: 15px solid #fff;
+    outline: 2px solid #c5a059;
+    background: #fff;
+    object-fit: contain; /* Ensure full image is visible */
+    padding: 10px; /* Internal breathing room to prevent touching borders */
+}
+
+.image-modal.active .modal-content {
+    transform: scale(1);
+}
+
+.modal-instruction {
+    position: absolute;
+    bottom: 40px;
+    color: #1a1a1a;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-style: italic;
+    opacity: 0.8;
+    background: rgba(255, 255, 255, 0.6);
+    padding: 12px 40px;
+    border-radius: 100px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    letter-spacing: 1px;
+}
