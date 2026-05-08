@@ -62,8 +62,11 @@ async function placeOrder(customerName, whatsapp, message, productName) {
 
         const fullMessage = `${header}\n\n🆔 *Order ID:* #${shortOrderId} (Auto-generated)\n👤 *Customer Name:* ${customerName}\n📱 *WhatsApp:* ${whatsapp}\n🎁 *Product Selected:* ${productName}\n🎨 *Customization:* ${message || "Standard"}${footer}`;
 
-        // WhatsApp Link Generator
-        const whatsappUrl = `https://wa.me/${myNumber}?text=${encodeURIComponent(fullMessage)}`;
+        // WhatsApp Link Generator (Direct App on Mobile)
+        const isMobileDevice = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        const whatsappUrl = isMobileDevice 
+            ? `whatsapp://send?phone=${myNumber}&text=${encodeURIComponent(fullMessage)}`
+            : `https://wa.me/${myNumber}?text=${encodeURIComponent(fullMessage)}`;
 
         // C. Animation Trigger (Shatter Effect)
         if (typeof shatterBox === "function") {
