@@ -77,7 +77,7 @@ async function placeOrder(customerName, whatsapp, message, productName) {
 
         // D. Redirect to WhatsApp (5 seconds delay for animation)
         setTimeout(() => {
-            window.open(whatsappUrl, '_blank');
+            window.location.href = whatsappUrl;
         }, 5000);
 
         // Update UI
