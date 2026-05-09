@@ -632,11 +632,26 @@ body {
 
 @media (max-width: 768px) {
     .navbar {
-        grid-template-columns: 1fr 1fr;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        padding: 1rem 5%;
     }
 
     .nav-center {
-        display: none;
+        display: flex;
+        width: 100%;
+        order: 3;
+        margin-top: 1rem;
+        overflow-x: auto;
+        padding-bottom: 5px;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .nav-links {
+        gap: 1.5rem;
+        margin: 0 auto;
+        white-space: nowrap;
     }
 
     .hero-content h1 {
@@ -655,7 +670,7 @@ body {
     }
 
     .page-section {
-        padding: 80px 5% 30px;
+        padding: 130px 5% 30px;
     }
 
     .hero-image-wrapper {
