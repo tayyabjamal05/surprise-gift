@@ -53,7 +53,7 @@ async function placeOrder(customerName, whatsapp, message, productName, isMobile
         });
 
         // B. WhatsApp Prompt Configuration
-        const myNumber = "923293163015"; 
+        const myNumber = "923135571320"; 
         const orderId = newOrderRef.key; 
         const shortOrderId = orderId.substring(orderId.length - 4).toUpperCase();
 
